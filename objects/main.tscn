@@ -1,0 +1,93 @@
+[gd_scene load_steps=9 format=3 uid="uid://dybxbiy6kcqv8"]
+
+[ext_resource type="Script" path="res://objects/main.gd" id="1_saenx"]
+[ext_resource type="Texture2D" uid="uid://bp6p5bam4punw" path="res://icon.svg" id="2_603ei"]
+[ext_resource type="PackedScene" uid="uid://br8kkly6smce1" path="res://objects/ball/obj_ball.tscn" id="2_kgpwb"]
+[ext_resource type="PackedScene" uid="uid://c44ep0eydkji7" path="res://windows/window/obj_window.tscn" id="2_tm3gw"]
+[ext_resource type="PackedScene" uid="uid://btwtytaa7vqx1" path="res://objects/viewport_camera/obj_viewportCamera.tscn" id="3_iq73f"]
+[ext_resource type="PackedScene" uid="uid://c5g3o1xgqbyw0" path="res://objects/player/obj_player.tscn" id="5_2y060"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hjcu3"]
+size = Vector2(1408, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x0joc"]
+size = Vector2(64, 720)
+
+[node name="Main" type="Node"]
+script = ExtResource("1_saenx")
+
+[node name="Icon" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0, 0, 0, 1)
+position = Vector2(640, 360)
+scale = Vector2(15, 9)
+texture = ExtResource("2_603ei")
+metadata/_edit_lock_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(640, 360)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -400)
+shape = SubResource("RectangleShape2D_hjcu3")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 400)
+shape = SubResource("RectangleShape2D_hjcu3")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-672, 0)
+shape = SubResource("RectangleShape2D_x0joc")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(672, 0)
+shape = SubResource("RectangleShape2D_x0joc")
+
+[node name="BallEntity" parent="." instance=ExtResource("2_kgpwb")]
+position = Vector2(640, 360)
+scale = Vector2(3, 3)
+
+[node name="Camera" type="Camera2D" parent="BallEntity"]
+
+[node name="P1" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("2_tm3gw")]
+camera = NodePath("Player/ViewportCamera")
+
+[node name="Player" parent="P1" node_paths=PackedStringArray("texture") instance=ExtResource("5_2y060")]
+position = Vector2(192, 360)
+scale = Vector2(3, 3)
+texture = NodePath("Sprite")
+
+[node name="ViewportCamera" parent="P1/Player" instance=ExtResource("3_iq73f")]
+
+[node name="P2" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("2_tm3gw")]
+auto_translate_mode = 1
+camera = NodePath("Player/ViewportCamera")
+
+[node name="Player" parent="P2" node_paths=PackedStringArray("texture") instance=ExtResource("5_2y060")]
+position = Vector2(1164, 0)
+scale = Vector2(3, 3)
+texture = NodePath("Sprite")
+player_id = 1
+
+[node name="ViewportCamera" parent="P2/Player" instance=ExtResource("3_iq73f")]
+
+[node name="P3" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("2_tm3gw")]
+auto_translate_mode = 1
+camera = NodePath("BallEntity/ViewportCamera")
+
+[node name="BallEntity" parent="P3" instance=ExtResource("2_kgpwb")]
+position = Vector2(608, 328)
+scale = Vector2(3, 3)
+
+[node name="ViewportCamera" parent="P3/BallEntity" instance=ExtResource("3_iq73f")]
+
+[node name="P4" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("2_tm3gw")]
+auto_translate_mode = 1
+camera = NodePath("BallEntity/ViewportCamera")
+
+[node name="BallEntity" parent="P4" instance=ExtResource("2_kgpwb")]
+position = Vector2(672, 392)
+scale = Vector2(3, 3)
+
+[node name="ViewportCamera" parent="P4/BallEntity" instance=ExtResource("3_iq73f")]

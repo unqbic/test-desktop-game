@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c44ep0eydkji7"]
+
+[ext_resource type="Script" path="res://windows/window/obj_window.gd" id="1_a3bnq"]
+
+[node name="Window" type="Window"]
+position = Vector2i(0, 36)
+script = ExtResource("1_a3bnq")

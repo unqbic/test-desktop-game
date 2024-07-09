@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5g3o1xgqbyw0"]
+
+[ext_resource type="Script" path="res://objects/player/obj_player.gd" id="1_i1c0h"]
+[ext_resource type="Texture2D" uid="uid://cb1afv0cgq8yv" path="res://objects/spr_objects.png" id="2_jq5ro"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oggo8"]
+atlas = ExtResource("2_jq5ro")
+region = Rect2(8, 1, 8, 31)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mtjbp"]
+size = Vector2(8, 32)
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("texture")]
+motion_mode = 1
+platform_on_leave = 2
+platform_floor_layers = 4294967040
+script = ExtResource("1_i1c0h")
+texture = NodePath("Sprite")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 1
+texture = SubResource("AtlasTexture_oggo8")
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_mtjbp")

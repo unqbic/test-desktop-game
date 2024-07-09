@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://btwtytaa7vqx1"]
+
+[ext_resource type="Script" path="res://objects/viewport_camera/obj_viewportCamera.gd" id="1_2qm1c"]
+
+[node name="ViewportCamera" type="Camera2D"]
+script = ExtResource("1_2qm1c")

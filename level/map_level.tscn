@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://bhva5t37tih3t"]
+
+[ext_resource type="PackedScene" uid="uid://c5g3o1xgqbyw0" path="res://objects/player/obj_player.tscn" id="1_3aaha"]
+[ext_resource type="Texture2D" uid="uid://bp6p5bam4punw" path="res://icon.svg" id="1_moh35"]
+[ext_resource type="PackedScene" uid="uid://br8kkly6smce1" path="res://objects/ball/obj_ball.tscn" id="3_3aist"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ambbw"]
+size = Vector2(512, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pin6k"]
+size = Vector2(64, 224)
+
+[node name="Game" type="Node2D"]
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="Icon" type="Sprite2D" parent="World"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(2.28882e-05, 0)
+scale = Vector2(5, 3)
+texture = ExtResource("1_moh35")
+metadata/_edit_lock_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="World"]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/StaticBody2D"]
+position = Vector2(0, -152)
+shape = SubResource("RectangleShape2D_ambbw")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="World/StaticBody2D"]
+position = Vector2(0, 152)
+shape = SubResource("RectangleShape2D_ambbw")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="World/StaticBody2D"]
+position = Vector2(-224, 0)
+shape = SubResource("RectangleShape2D_pin6k")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="World/StaticBody2D"]
+position = Vector2(224, 0)
+shape = SubResource("RectangleShape2D_pin6k")
+metadata/_edit_lock_ = true
+
+[node name="Player" parent="World" node_paths=PackedStringArray("texture") instance=ExtResource("1_3aaha")]
+position = Vector2(-168, 0)
+texture = NodePath("Sprite")
+
+[node name="Player2" parent="World" node_paths=PackedStringArray("texture") instance=ExtResource("1_3aaha")]
+position = Vector2(168, 0)
+texture = NodePath("Sprite")
+player_id = 1
+
+[node name="Ball" parent="World" instance=ExtResource("3_3aist")]
